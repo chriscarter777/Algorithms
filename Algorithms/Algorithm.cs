@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Text.RegularExpressions;
 
 namespace Algorithms
 {
@@ -38,7 +39,7 @@ namespace Algorithms
 
           public static int Factorial(int i)
           {
-               if(i == 1)
+               if (i == 1)
                {
                     return 1;
                }
@@ -57,9 +58,9 @@ namespace Algorithms
 
           public static void TraverseBTInOrder(BinaryNode<string> node, List<string> result)
           {
-               if(node != null)
+               if (node != null)
                {
-                    if(node.Left != null)
+                    if (node.Left != null)
                     {
                          TraverseBTInOrder(node.Left, result);
                     }
@@ -117,23 +118,23 @@ namespace Algorithms
                //If it is not possible to balance the scale, return the string "not possible".
 
                //parse input string
-               string[] givens = input[0].Replace('[',' ').Replace(']', ' ').Split(',');
+               string[] givens = input[0].Replace('[', ' ').Replace(']', ' ').Split(',');
                int left = Int32.Parse(givens[0].Trim());
                int right = Int32.Parse(givens[1].Trim());
                int diff = Math.Abs(left - right);
 
                string[] usewts = input[1].Replace('[', ' ').Replace(']', ' ').Split(',');
                int[] options = new int[usewts.Length];
-               for(int i = 0; i < usewts.Length; i++)
+               for (int i = 0; i < usewts.Length; i++)
                {
-                    options[i] =  Int32.Parse(usewts[i].Trim());
+                    options[i] = Int32.Parse(usewts[i].Trim());
                }
                Array.Sort(options);
 
                //can you do it with one weight?
-               for( int i = 0; i < options.Length; i++ )
+               for (int i = 0; i < options.Length; i++)
                {
-                    if(options[i] == diff)
+                    if (options[i] == diff)
                     {
                          return options[i].ToString();
                     }
@@ -157,37 +158,26 @@ namespace Algorithms
           public static bool QuestionMark(string s)
           {
                // Take an input string parameter and determine if exactly 3 question marks exist between every pair of numbers that add up to 10.
-               // If so, return true, otherwise return false.
+               // If so, return true, otherwise return false.  Also return false if no adjacent pairs sum to 10.
                char[] chars = s.ToCharArray();
-               for (int i = 0; i < chars.Length - 1; i++)
+               int lastDigit = 0;
+               int qCount = 0;
+               bool tenPair = false;
+               for (int i = 0; i < chars.Length; i++)
                {
                     if (Char.IsNumber(chars[i]))
                     {
-                         int counter = 0;
-                         for (int j = i + 1; j < chars.Length; j++)
+                         if (Char.GetNumericValue(chars[i]) + lastDigit == 10)
                          {
-                              if(chars[j] == '?')
-                              {
-                                   counter++;
-                              }
-                              if (Char.IsNumber(chars[j]))
-                              {
-                                   if (Char.GetNumericValue(chars[i]) + Char.GetNumericValue(chars[j]) == 10){
-                                        if(counter != 3)
-                                        {
-                                             return false;
-                                        }
-                                   }
-                                   else
-                                   {
-                                        break;
-                                   }
-                              }
-
+                              if (qCount != 3) return false;
+                              tenPair = true;
                          }
+                         lastDigit = (int)Char.GetNumericValue(chars[i]);
+                         qCount = 0;
                     }
+                    if(chars[i] == '?') qCount++;
                }
-               return true;
+               return tenPair ? true : false;
           }
      }  //class
 

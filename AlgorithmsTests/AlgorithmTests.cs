@@ -156,7 +156,7 @@ namespace AlgorithmsTests
                bool result3 = Algorithm.QuestionMark(s3);
                string s4 = "9???1???9???1???9";
                bool result4 = Algorithm.QuestionMark(s4);
-               string s5 = "aa6?4";
+               string s5 = "aa6?9";
                bool result5 = Algorithm.QuestionMark(s5);
                Debug.WriteLine(result1.ToString() + result2.ToString() + result3.ToString() + result4.ToString() + result5.ToString());
                Assert.IsTrue(result1);
