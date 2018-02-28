@@ -259,5 +259,17 @@ namespace AlgorithmsTests
                }
           }
 
+          [TestMethod]
+          public void HighestProductOfThreeTest()
+          {
+               int[] numbers1 = { 2, 3, 4, 5 };
+               int[] numbers2 = { 5, 2, 4, 3 };
+               int expected1 = 60;
+               int expected2 = 60;
+               int result1 = Algorithm.HighestProductOfThree(numbers1);
+               int result2 = Algorithm.HighestProductOfThree(numbers2);
+               Assert.AreEqual(expected1, result1);
+               Assert.AreEqual(expected2, result2);
+          }
      }  //class
 }  //namespace

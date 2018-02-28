@@ -256,6 +256,32 @@ namespace Algorithms
                return results;
           }
 
+          public static int HighestProductOfThree(int[] numbers)
+          {
+               int h0 = 0;
+               int h1 = 0;
+               int h2 = 0;
+               for (int i = 0; i < numbers.Length; i++)
+               {
+                    if (numbers[i] > h0)
+                    {
+                         h2 = h1;
+                         h1 = h0;
+                         h0 = numbers[i];
+                    }
+                    else if (numbers[i] > h1)
+                    {
+                         h2 = h1;
+                         h1 = numbers[i];
+                    }
+                    else if(numbers[i] > h2)
+                    {
+                         h2 = numbers[i];
+                    }
+               }
+               return h0 * h1 * h2;
+          }
+
      }  //class
 
 
