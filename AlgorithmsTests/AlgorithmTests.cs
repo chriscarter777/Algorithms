@@ -13,53 +13,71 @@ namespace AlgorithmsTests
           public void ReverseString0Test()
           {
                string original = "abcd";
-               string desired = "dcba";
+               string expected = "dcba";
                string result = Algorithm.ReverseString1(original);
-               Assert.AreEqual(result, desired);
+               Assert.AreEqual(expected, result);
           }
 
           [TestMethod]
           public void ReverseString1Test()
           {
                string original = "abcd";
-               string desired = "dcba";
+               string expected = "dcba";
                string result = Algorithm.ReverseString1(original);
-               Assert.AreEqual(result, desired);
+               Assert.AreEqual(expected, result);
           }
 
           [TestMethod]
           public void ReverseString2Test()
           {
                string original = "abcd";
-               string desired = "dcba";
+               string expected = "dcba";
                string result = Algorithm.ReverseString2(original);
-               Assert.AreEqual(result, desired);
+               Assert.AreEqual(expected, result);
           }
 
           [TestMethod]
           public void FactorialRTest()
           {
                int original = 12;
-               int desired = 479001600;
+               long expected = 479001600;
                DateTime start = DateTime.Now;
-               int result = Algorithm.Factorial(original);
+               long result = Algorithm.Factorial(original);
                DateTime end = DateTime.Now;
                Debug.WriteLine(end - start);
-               Assert.AreEqual(result, desired);
+               Assert.AreEqual(expected, result);
           }
 
           [TestMethod]
           public void FactorialNRTest()
           {
                int original = 12;
-               int desired = 479001600;
+               long expected = 479001600;
                DateTime start = DateTime.Now;
-               int result = Algorithm.FactorialNonRecur(original);
+               long result = Algorithm.FactorialNonRecur(original);
                DateTime end = DateTime.Now;
                Debug.WriteLine(end - start);
-               Assert.AreEqual(result, desired);
+               Assert.AreEqual(expected, result);
           }
 
+
+          [TestMethod]
+          public void FibonacciTest()
+          {
+               int n = 8;
+               long expected = 21;
+               long result = Algorithm.Fibonacci(n);
+               Assert.AreEqual(expected, result);
+          }
+
+          [TestMethod]
+          public void FibonacciNonRecurTest()
+          {
+               int n = 8;
+               long expected = 21;
+               long result = Algorithm.FibonacciNonRecur(n);
+               Assert.AreEqual(expected, result);
+          }
 
           [TestMethod]
           public void TraverseBTInOrderTest()
@@ -80,12 +98,12 @@ namespace AlgorithmsTests
                nodes[5].AddLeftNode(nodes[4]);
                nodes[5].AddRightNode(nodes[6]);
 
-               List<string> desired = new List<string> { "A", "B", "C", "D", "E", "F", "G" };
+               List<string> expected = new List<string> { "A", "B", "C", "D", "E", "F", "G" };
                List<string> result = new List<string>();
                Algorithm.TraverseBTInOrder(nodes[3], result);
                for(int i = 0; i < result.Count; i++)
                {
-                    Assert.AreEqual(result[i], desired[i]);
+                    Assert.AreEqual(expected[i], result[i]);
                }
           }
 
@@ -108,12 +126,12 @@ namespace AlgorithmsTests
                nodes[5].AddLeftNode(nodes[4]);
                nodes[5].AddRightNode(nodes[6]);
 
-               List<string> desired = new List<string> { "D", "B", "A", "C", "F", "E", "G" };
+               List<string> expected = new List<string> { "D", "B", "A", "C", "F", "E", "G" };
                List<string> result = new List<string>();
                Algorithm.TraverseBTPreOrder(nodes[3], result);
                for (int i = 0; i < result.Count; i++)
                {
-                    Assert.AreEqual(result[i], desired[i]);
+                    Assert.AreEqual(expected[i], result[i]);
                }
           }
 
@@ -136,12 +154,12 @@ namespace AlgorithmsTests
                nodes[5].AddLeftNode(nodes[4]);
                nodes[5].AddRightNode(nodes[6]);
 
-               List<string> desired = new List<string> { "A", "C", "B", "E", "G", "F", "D" };
+               List<string> expected = new List<string> { "A", "C", "B", "E", "G", "F", "D" };
                List<string> result = new List<string>();
                Algorithm.TraverseBTPostOrder(nodes[3], result);
                for (int i = 0; i < result.Count; i++)
                {
-                    Assert.AreEqual(result[i], desired[i]);
+                    Assert.AreEqual(expected[i], result[i]);
                }
           }
 
@@ -181,10 +199,65 @@ namespace AlgorithmsTests
                Debug.WriteLine(result2);
                Debug.WriteLine(result3);
                Debug.WriteLine("------------------");
-               Assert.AreEqual(result1, "1");
-               Assert.AreEqual(result2, "3,6");
-               Assert.AreEqual(result3, "not possible");
+               Assert.AreEqual("1", result1);
+               Assert.AreEqual("3,6", result2);
+               Assert.AreEqual("not possible", result3);
           }
 
-     }
-}
+          [TestMethod]
+          public void AppleStocksTest()
+          {
+               int[] prices1 = { 100, 110, 120, 155, 140, 105 };
+               int[] prices2 = { 100, 110, 80, 70, 115, 130 };
+               int[] prices3 = { 100, 50, 110, 40, 120 };
+               int expected1 = 55;
+               int expected2 = 60;
+               int expected3 = 80;
+               int result1 = Algorithm.AppleStocks(prices1);
+               int result2 = Algorithm.AppleStocks(prices2);
+               int result3 = Algorithm.AppleStocks(prices3);
+               Assert.AreEqual(expected1, result1);
+               Assert.AreEqual(expected2, result2);
+               Assert.AreEqual(expected3, result3);
+          }
+
+          [TestMethod]
+          public void ProductOfOtherNumbersTest()
+          {
+               int[] numbers1 = { 2, 3, 4, 5 };
+               int[] numbers2 = { 5, 2, 4, 3 };
+               int[] expected1 = { 60, 40, 30, 24 };
+               int[] expected2 = { 24, 60, 30, 40 };
+               int[] result1 = Algorithm.ProductOfOtherNumbers(numbers1);
+               //int[] result2 = Algorithm.ProductOfOtherNumbers(numbers2);
+               for (int i = 0; i < result1.Length; i++)
+               {
+                    Assert.AreEqual(expected1[i], result1[i]);
+               }
+               //for (int i = 0; i < result2.Length; i++)
+               //{
+               //     Assert.AreEqual(expected2[i], result2[i]);
+               //}
+          }
+
+          [TestMethod]
+          public void ProductOfOtherNumbersBruteTest()
+          {
+               int[] numbers1 = { 2, 3, 4, 5 };
+               int[] numbers2 = { 5, 2, 4, 3 };
+               int[] expected1 = { 60, 40, 30, 24 };
+               int[] expected2 = { 24, 60, 30, 40 };
+               int[] result1 = Algorithm.ProductOfOtherNumbersBrute(numbers1);
+               int[] result2 = Algorithm.ProductOfOtherNumbersBrute(numbers2);
+               for (int i = 0; i < result1.Length; i++)
+               {
+                    Assert.AreEqual(expected1[i], result1[i]);
+               }
+               for (int i = 0; i < result2.Length; i++)
+               {
+                    Assert.AreEqual(expected2[i], result2[i]);
+               }
+          }
+
+     }  //class
+}  //namespace

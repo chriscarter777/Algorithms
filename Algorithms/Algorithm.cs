@@ -1,6 +1,7 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Text.RegularExpressions;
+using System.Linq;
 
 namespace Algorithms
 {
@@ -37,7 +38,7 @@ namespace Algorithms
                return new string(origArray);
           }
 
-          public static int Factorial(int i)
+          public static long Factorial(int i)
           {
                if (i == 1)
                {
@@ -46,7 +47,7 @@ namespace Algorithms
                return i * Factorial(i - 1);
           }
 
-          public static int FactorialNonRecur(int operand)
+          public static long FactorialNonRecur(int operand)
           {
                int result = 1;
                for (int i = 2; i <= operand; i++)
@@ -55,6 +56,28 @@ namespace Algorithms
                }
                return result;
           }
+
+          public static long Fibonacci(int n)
+          {
+               if (n < 2) { return n; }
+               else
+               {
+                    return Fibonacci(n - 1) + Fibonacci(n - 2);
+               }
+          }
+
+          public static long FibonacciNonRecur(int n)
+          {
+               long[] f = new long[n + 1];
+               f[0] = 0;
+               f[1] = 1;
+               for (int i = 2; i <= n; i++)
+               {
+                    f[i] = f[i - 1] + f[i - 2];
+               }
+               return f[n];
+          }
+
 
           public static void TraverseBTInOrder(BinaryNode<string> node, List<string> result)
           {
@@ -175,11 +198,68 @@ namespace Algorithms
                          lastDigit = (int)Char.GetNumericValue(chars[i]);
                          qCount = 0;
                     }
-                    if(chars[i] == '?') qCount++;
+                    if (chars[i] == '?') qCount++;
                }
                return tenPair ? true : false;
           }
+
+          public static int AppleStocks(int[] prices)
+          {
+               int maxDiff = prices[0] * (-1);
+               int minPrice = prices[0];
+               for (int i = 1; i < prices.Length; i++)
+               {
+                    if (prices[i] - minPrice > maxDiff)  maxDiff = prices[i] - minPrice;
+                    if (prices[i] < minPrice) minPrice = prices[i];
+               }
+               return maxDiff;
+          }
+
+          public static int[] ProductOfOtherNumbers(int[] numbers)
+          {
+               //use of division is disallowed
+               int[] results = new int[numbers.Length];
+
+               int[] beforeProd = new int[numbers.Length];
+               beforeProd[0] = 1;
+               for (int i = 1; i < numbers.Length; i++)
+               {
+                    beforeProd[i] = beforeProd[i - 1] * numbers[i - 1];
+               }
+
+               int[] afterProd = new int[numbers.Length];
+               afterProd[numbers.Length - 1] = 1;
+               for (int i = (numbers.Length - 2); i >= 0; i--)
+               {
+                    afterProd[i] = afterProd[i + 1] * numbers[i + 1];
+               }
+
+               for (int i = 0; i < numbers.Length; i++)
+               {
+                    results[i] = beforeProd[i] * afterProd[i];
+               }
+               return results;
+          }
+
+          public static int[] ProductOfOtherNumbersBrute(int[] numbers)
+          {
+               //use of division is disallowed
+               int[] results = new int[numbers.Length];
+               for (int i = 0; i < numbers.Length; i++)
+               {
+                    results[i] = 1;
+                    for (int j = 0; j < numbers.Length; j++)
+                    {
+                         if (j != i) results[i] = results[i] * numbers[j];
+                    }
+               }
+               return results;
+          }
+
      }  //class
+
+
+
 
      public class BinaryNode<T>
      {
