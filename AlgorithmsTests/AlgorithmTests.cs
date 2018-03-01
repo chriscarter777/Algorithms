@@ -332,6 +332,7 @@ namespace AlgorithmsTests
 
                List<Appointment> result = Algorithm.CalendarMerge(input);
 
+               Assert.AreEqual(expected.Count, result.Count);
                for (int i = 0; i < expected.Count; i++)
                {
                     Assert.AreEqual(expected[i].Start, result[i].Start);
