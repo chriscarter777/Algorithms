@@ -282,6 +282,42 @@ namespace Algorithms
                return h0 * h1 * h2;
           }
 
+          public static List<Appointment> CalendarMerge(List<Appointment> appts)
+          {
+               for (int i = 0; i < appts.Count - 1; i++)
+               {
+                    int j = i + 1;
+                    while (j < appts.Count)
+                    {
+                         //j surrounds i
+                         if (appts[j].Start <= appts[i].Start && appts[j].End >= appts[i].End)
+                         {
+                              appts[i].Start = appts[j].Start;
+                              appts[i].End = appts[j].End;
+                              appts.RemoveAt(j);
+
+                         }
+                         //j extends i end
+                         else if (appts[j].Start >= appts[i].Start && appts[j].Start <= appts[i].End && appts[j].End >= appts[i].End)
+                         {
+                              appts[i].End = appts[j].End;
+                              appts.RemoveAt(j);
+                         }
+                         //j extends i start
+                         else if (appts[j].Start <= appts[i].Start && appts[j].End >= appts[i].Start && appts[j].End <= appts[i].End)
+                         {
+                              appts[i].Start = appts[j].Start;
+                              appts.RemoveAt(j);
+                         }
+                         else
+                         {
+                              j++;
+                         }
+                    }  //j
+               }  //i
+               return appts;
+          }
+
      }  //class
 
 
@@ -308,5 +344,17 @@ namespace Algorithms
           {
                Right = newNode;
           }
-     }  //class
+     }  //BinaryNode<T> class
+
+     public class Appointment
+     {
+          public int Start { get; set; }
+          public int End { get; set; }
+
+          public Appointment(int s, int e)
+          {
+               Start = s;
+               End = e;
+          }
+     }  //Appointment class
 }  //namespace
